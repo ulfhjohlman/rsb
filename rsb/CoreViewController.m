@@ -18,8 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableCellsText = [NSArray arrayWithObjects: [@"Bajs på sida " stringByAppendingString: self.wallName], @"row2",@"row3",nil];
-    self.navItem.title = self.wallName;
+    self.tableCellsText = [NSArray arrayWithObjects: @"Bajs på dig", @"row2",@"row3",nil];
     
 }
 

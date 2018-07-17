@@ -11,7 +11,6 @@
 @interface CoreViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *ImageView;
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
-@property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 @property NSString * wallName;
 @property NSUInteger wallNumberID;
 @property NSArray * tableCellsText;

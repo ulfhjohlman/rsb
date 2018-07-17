@@ -27,11 +27,10 @@
     }else{
         [NSException raise: @"Unknown tabTitle: " format: @" %@ ",tabTitle];
     };
-    UINavigationController * NavVc0 = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreNavController"];
-    CoreViewController * vc0 = (CoreViewController*) NavVc0.topViewController;
+    CoreViewController * vc0 = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
     vc0.wallNumberID = 0;
     vc0.wallName = [@(vc0.wallNumberID) stringValue];
-    VCArray = [@[NavVc0] mutableCopy];
+    VCArray = [@[vc0] mutableCopy];
     [self setViewControllers: VCArray direction: UIPageViewControllerNavigationDirectionForward animated: NO completion: nil];
 }
 
@@ -43,28 +42,28 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
     
-    CoreViewController * prevVC = ((CoreViewController *)((UINavigationController*)viewController).topViewController);
+    CoreViewController * prevVC = (CoreViewController *)viewController;
     if(prevVC == nil){
+        NSLog(@"WARNING: PrevVC is not a CoreViewController. How did we get here?");
         return nil;
     }
     NSUInteger wantedWallNumberID = prevVC.wallNumberID + 1;
-    UINavigationController * nextNavVC;
     CoreViewController * nextVC;
     if( (wantedWallNumberID+1) > VCArray.count){
-        nextNavVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreNavController"];
-        nextVC = (CoreViewController*) nextNavVC.topViewController;
+        nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
         nextVC.wallName = [@(wantedWallNumberID) stringValue];
         nextVC.wallNumberID = wantedWallNumberID;
-        [VCArray addObject:nextNavVC];
+        [VCArray addObject:nextVC];
     } else{
-        nextNavVC = [VCArray objectAtIndex: wantedWallNumberID];
+        nextVC = [VCArray objectAtIndex: wantedWallNumberID];
     }
-    return nextNavVC;
+    return nextVC;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
-    CoreViewController * prevVC = ((CoreViewController *)((UINavigationController*)viewController).topViewController);
+    CoreViewController * prevVC = (CoreViewController *)viewController;
     if(prevVC == nil){
+        NSLog(@"WARNING: PrevVC is not a CoreViewController. How did we get here?");
         return nil;
     }
     NSUInteger wantedWallNumberID = prevVC.wallNumberID - 1;

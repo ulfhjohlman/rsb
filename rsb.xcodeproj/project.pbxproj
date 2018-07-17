@@ -19,6 +19,7 @@
 		614FBEFE20FD412E00897378 /* CorePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBEF420FD412D00897378 /* CorePageViewController.m */; };
 		614FBEFF20FD412E00897378 /* CoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBEF620FD412D00897378 /* CoreViewController.m */; };
 		614FBF0020FD412E00897378 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBEFA20FD412E00897378 /* SettingsViewController.m */; };
+		614FBF0520FE0D8900897378 /* CoreNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBF0420FE0D8900897378 /* CoreNavController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		614FBEF820FD412E00897378 /* CoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreViewController.h; sourceTree = "<group>"; };
 		614FBEF920FD412E00897378 /* CircuitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircuitsViewController.h; sourceTree = "<group>"; };
 		614FBEFA20FD412E00897378 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		614FBF0320FE0D8900897378 /* CoreNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreNavController.h; sourceTree = "<group>"; };
+		614FBF0420FE0D8900897378 /* CoreNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreNavController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,9 @@
 		614FBEBD20FD3ED800897378 /* rsb */ = {
 			isa = PBXGroup;
 			children = (
+				614FBEC920FD3EE300897378 /* LaunchScreen.storyboard */,
+				614FBEC720FD3EE300897378 /* Assets.xcassets */,
+				614FBEF020FD412C00897378 /* Storyboard.storyboard */,
 				614FBEF920FD412E00897378 /* CircuitsViewController.h */,
 				614FBEF120FD412C00897378 /* CircuitsViewController.m */,
 				614FBEF320FD412D00897378 /* CorePageViewController.h */,
@@ -123,11 +129,10 @@
 				614FBEF620FD412D00897378 /* CoreViewController.m */,
 				614FBEF720FD412D00897378 /* SettingsViewController.h */,
 				614FBEFA20FD412E00897378 /* SettingsViewController.m */,
-				614FBEF020FD412C00897378 /* Storyboard.storyboard */,
+				614FBF0320FE0D8900897378 /* CoreNavController.h */,
+				614FBF0420FE0D8900897378 /* CoreNavController.m */,
 				614FBEBE20FD3ED800897378 /* AppDelegate.h */,
 				614FBEBF20FD3ED800897378 /* AppDelegate.m */,
-				614FBEC720FD3EE300897378 /* Assets.xcassets */,
-				614FBEC920FD3EE300897378 /* LaunchScreen.storyboard */,
 				614FBECC20FD3EE300897378 /* Info.plist */,
 				614FBECD20FD3EE300897378 /* main.m */,
 			);
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				614FBF0520FE0D8900897378 /* CoreNavController.m in Sources */,
 				614FBEFE20FD412E00897378 /* CorePageViewController.m in Sources */,
 				614FBEFF20FD412E00897378 /* CoreViewController.m in Sources */,
 				614FBECE20FD3EE300897378 /* main.m in Sources */,
