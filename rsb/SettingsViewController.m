@@ -8,7 +8,9 @@
 
 #import "SettingsViewController.h"
 
-@interface SettingsViewController ()
+@interface SettingsViewController ()<GIDSignInUIDelegate>{
+    
+}
 -(void)fillInUserDefaults;
 @end
 
@@ -16,9 +18,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [GIDSignIn sharedInstance].uiDelegate = self;
+    [[GIDSignIn sharedInstance] signInSilently];
+    self.authStateHandle = [[FIRAuth auth]
+                   addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
+                       
+                       if (user) {
+                           [FIRAnalytics logEventWithName:kFIREventLogin parameters:nil];
+                           [self showSuccessfulLogin:user];
+                       }
+                       else{
+                           [self showSuccessfulLogout];
+                       }
+                   }];
+    
     self.userSettings = NSUserDefaults.standardUserDefaults;
     [self fillInUserDefaults];
 
+}
+
+-(void)showSuccessfulLogin: (FIRUser *) user{
+    self.settingsSignOutButton.hidden = false;
+    NSString * name = user.providerData.firstObject.displayName;
+    if(name){
+        self.settingsSignedInAsLabel.text = [NSString stringWithFormat:@"%@ %@", @"Logged in as:",name];;
+    } else {
+        self.settingsSignedInAsLabel.text = @"unknown";
+    }
+    //TODO show editing privelages?
+    
+}
+-(void)showSuccessfulLogout{
+    self.settingsSignOutButton.hidden = true;
+    self.settingsSignedInAsLabel.text = @"Not signed in";
+}
+
+- (void)dealloc {
+    [[FIRAuth auth] removeAuthStateDidChangeListener:_authStateHandle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,16 +97,7 @@
     
 }
 
-- (IBAction)settingsInstanceConnectionNameEditingChanged:(id)sender {
-}
-- (IBAction)settingsDatabaseNameEditingChanged:(id)sender {
-}
-- (IBAction)settingsUserEditingChanged:(id)sender {
-}
-- (IBAction)settingsPasswordEditingChanged:(id)sender {
-}
-
-- (IBAction)settingsCancelButtonPressed:(id)sender {
+-(IBAction)settingsCancelButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
@@ -81,7 +108,14 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-
-- (IBAction)settingsTestConnectionButtonPressed:(id)sender {
+- (IBAction)settingsSignOutButtonPressed:(id)sender {
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
+    [[GIDSignIn sharedInstance] signOut];
+    
 }
 @end

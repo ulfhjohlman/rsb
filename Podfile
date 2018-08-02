@@ -9,6 +9,8 @@ target 'rsb' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
+  pod 'GoogleSignIn'
   
   target 'rsbTests' do
     inherit! :search_paths

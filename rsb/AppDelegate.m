@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+@import Firebase;
+@import GoogleSignIn;
 
 @interface AppDelegate ()
 
@@ -49,5 +51,46 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+   if (error == nil) {
+        GIDAuthentication *authentication = user.authentication;
+        FIRAuthCredential *credential =
+        [FIRGoogleAuthProvider credentialWithIDToken:authentication.idToken
+                                         accessToken:authentication.accessToken];
+        [[FIRAuth auth] signInAndRetrieveDataWithCredential:credential completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error %@", error.localizedDescription);
+                return;
+            }
+            if (authResult == nil){
+                NSLog(@"authResult is nil, FireBase sign in failed.");
+                return;
+            }
+            else {
+                NSLog(@"Successful FireBase SignIn!");
+            }
+        }];
+    } else {
+        NSLog(@"Error %@", error.localizedDescription);
+    }
+}
+
+- (BOOL)application:(nonnull UIApplication *)application
+            openURL:(nonnull NSURL *)url
+            options:(nonnull NSDictionary<NSString *, id> *)options {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:sourceApplication
+                                      annotation:annotation];
+}
 
 @end
