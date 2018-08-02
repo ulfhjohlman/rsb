@@ -28,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsDoneButton;
 - (IBAction)settingsDoneButtonPressed:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsCancelButton;
+- (IBAction)settingsCancelButtonPressed:(id)sender;
+
 - (IBAction)settingsTestConnectionButtonPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *testConnectionActivitySpinner;
 

@@ -23,6 +23,11 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Settings" id="czg-MF-39g">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="nWO-Ug-4Wi">
+                                            <connections>
+                                                <action selector="settingsCancelButtonPressed:" destination="xN4-BR-Bjw" id="8he-jk-eiJ"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="2zt-xg-EK1">
                                             <connections>
                                                 <action selector="settingsDoneButtonPressed:" destination="xN4-BR-Bjw" id="uSV-VX-oq7"/>
@@ -226,6 +231,7 @@
                         <viewLayoutGuide key="safeArea" id="5Fw-Nz-Bqe"/>
                     </view>
                     <connections>
+                        <outlet property="settingsCancelButton" destination="nWO-Ug-4Wi" id="0Hf-DB-s9H"/>
                         <outlet property="settingsDatabaseName" destination="g1o-Za-MlA" id="tEp-l5-gMH"/>
                         <outlet property="settingsDoneButton" destination="2zt-xg-EK1" id="tfe-ZD-Gyz"/>
                         <outlet property="settingsFirstName" destination="i4d-gW-yfd" id="sQH-37-5KI"/>

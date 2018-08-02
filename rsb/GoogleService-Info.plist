@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>189894229675-0h71tn82512n14sjhsfj44bk8v94l5ur.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.189894229675-0h71tn82512n14sjhsfj44bk8v94l5ur</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBTZ9f-_bn9g796JvLubKHlGx1fUmKyvzk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>189894229675</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>se.fatpinchstudios.rsb</string>
+	<key>PROJECT_ID</key>
+	<string>routesetterbuddy-aa1f2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>routesetterbuddy-aa1f2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:189894229675:ios:fe063042733de908</string>
+	<key>DATABASE_URL</key>
+	<string>https://routesetterbuddy-aa1f2.firebaseio.com</string>
+</dict>
+</plist>

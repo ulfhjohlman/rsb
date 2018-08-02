@@ -38,10 +38,6 @@
     return true;
 }
 
--(void)settingsDoneButtonPressed:(id)sender{
-    [self dismissViewControllerAnimated:true completion:nil];
-}
-
 /*
 #pragma mark - Navigation
 
@@ -52,12 +48,17 @@
 }
 */
 
+
 - (IBAction)settingsFirstNameEditingChanged:(id)sender {
-    if([self.settingsFirstName.text length] < 24){
-        [self.userSettings setObject: self.settingsFirstName.text forKey:@"firstName"];
-    } else {
-        self.settingsFirstName.text = @"Max allowed name length is 24 chars :P";
+    if([self.settingsFirstName.text length] > 24){
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Invalid Name" message:@"Max 24 chars allowed :P" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
+    
 }
 
 - (IBAction)settingsInstanceConnectionNameEditingChanged:(id)sender {
@@ -68,6 +69,18 @@
 }
 - (IBAction)settingsPasswordEditingChanged:(id)sender {
 }
+
+- (IBAction)settingsCancelButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
+-(void)settingsDoneButtonPressed:(id)sender{
+    if([self.settingsFirstName.text length] <= 24){
+        [self.userSettings setObject: self.settingsFirstName.text forKey:@"firstName"];
+    }
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
 
 - (IBAction)settingsTestConnectionButtonPressed:(id)sender {
 }
