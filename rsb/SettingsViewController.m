@@ -19,27 +19,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [GIDSignIn sharedInstance].uiDelegate = self;
-    [[GIDSignIn sharedInstance] signInSilently];
     self.authStateHandle = [[FIRAuth auth]
-                   addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
-                       
-                       if (user) {
-                           [FIRAnalytics logEventWithName:kFIREventLogin parameters:nil];
-                           [self showSuccessfulLogin:user];
-                       }
-                       else{
-                           [self showSuccessfulLogout];
-                       }
-                   }];
+                            addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth, FIRUser *_Nullable user) {
+                                
+                                if (user) {
+                                    [FIRAnalytics logEventWithName:kFIREventLogin parameters:nil];
+                                    [self showLoggedIn:user];
+                                }
+                                else{
+                                    [self showLoggedOut];
+                                }
+                            }];
     
+    FIRUser* user = [[FIRAuth auth] currentUser];
+    if(user == nil){
+        NSLog(@"No current Loggin, atempting silent login.");
+        [[GIDSignIn sharedInstance] signInSilently];
+    }
+    else {
+        NSLog(@"Already logged in.");
+    }
     self.userSettings = NSUserDefaults.standardUserDefaults;
     [self fillInUserDefaults];
 
 }
 
--(void)showSuccessfulLogin: (FIRUser *) user{
+-(void)showLoggedIn: (FIRUser *) user{
     self.settingsSignOutButton.hidden = false;
-    NSString * name = user.providerData.firstObject.displayName;
+    NSString * name = user.displayName;
     if(name){
         self.settingsSignedInAsLabel.text = [NSString stringWithFormat:@"%@ %@", @"Logged in as:",name];;
     } else {
@@ -48,7 +55,7 @@
     //TODO show editing privelages?
     
 }
--(void)showSuccessfulLogout{
+-(void)showLoggedOut{
     self.settingsSignOutButton.hidden = true;
     self.settingsSignedInAsLabel.text = @"Not signed in";
 }
