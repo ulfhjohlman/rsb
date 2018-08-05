@@ -12,7 +12,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *ImageView;
 @property (strong, nonatomic) IBOutlet UITableView *TableView;
 @property NSString * wallName;
-@property NSUInteger wallNumberID;
-@property NSArray * tableCellsText;
+@property NSString * wallID;
+@property NSArray<NSString*> * tableCellsText;
 
 @end

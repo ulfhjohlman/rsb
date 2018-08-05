@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableCellsText = [NSArray arrayWithObjects: @"Bajs på dig", @"row2",@"row3",nil];
+    
+    self.tableCellsText = [NSArray arrayWithObjects: @"Bajs på dig", @"row2",@"row3", self.wallName, self.wallID,nil];
 }
 
 - (void)didReceiveMemoryWarning {

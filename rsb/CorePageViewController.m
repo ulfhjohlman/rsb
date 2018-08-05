@@ -13,25 +13,29 @@
 @end
 
 @implementation CorePageViewController{
-    NSMutableArray * VCArray;
+    NSString * gymBasePath;
+    NSString * gymClimbingTypePath;
+    NSString * wallListPath;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.dataSource = self;
-    NSString * tabTitle = self.tabBarController.tabBar.selectedItem.title;
-    if([ tabTitle isEqual: (@"Boulders")]){
-        self.pageClimbingType = @"Boulders";
-    }else if([ tabTitle isEqual: (@"Routes")]){
-        self.pageClimbingType = @"Routes";
-    }else{
-        [NSException raise: @"Unknown tabTitle: " format: @" %@ ",tabTitle];
-    };
-    CoreViewController * vc0 = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
-    vc0.wallNumberID = 0;
-    vc0.wallName = [@(vc0.wallNumberID) stringValue];
-    VCArray = [@[vc0] mutableCopy];
-    [self setViewControllers: VCArray direction: UIPageViewControllerNavigationDirectionForward animated: NO completion: nil];
+    self.delegate = self;
+    
+    [self configureClimbingType];
+    [self configureGymName];
+    gymBasePath = [NSString stringWithFormat: @"gyms/%@",self.gymName];
+    gymClimbingTypePath = [NSString stringWithFormat: @"%@/%@",gymBasePath,self.pageClimbingType];
+    wallListPath = [NSString stringWithFormat: @"%@/WALL_LIST",gymBasePath];
+    
+    
+    self.wallsList = [[NSMutableArray alloc] init];
+    self.VCDictionary =  [[NSMutableDictionary alloc] init];
+    [self configureDatabase];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,35 +47,77 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController{
     
     CoreViewController * prevVC = (CoreViewController *)viewController;
-    if(prevVC == nil){
-        NSLog(@"WARNING: PrevVC is not a CoreViewController. How did we get here?");
-        return nil;
-    }
-    NSUInteger wantedWallNumberID = prevVC.wallNumberID + 1;
     CoreViewController * nextVC;
-    if( (wantedWallNumberID+1) > VCArray.count){
+    NSAssert([prevVC isKindOfClass:[CoreViewController class]], @"WARNING: PrevVC is not a CoreViewController. How did we get here?");
+    
+    NSUInteger wanted = [self.wallsList indexOfObject:prevVC.wallName] + 1;
+    NSNumber * wantedWallIndex = [[NSNumber alloc] initWithUnsignedLong:wanted];
+    if( wantedWallIndex.intValue == self.wallsList.count){
+        wantedWallIndex = [NSNumber numberWithInt: 0];
+    }
+    nextVC = [self.VCDictionary objectForKey:wantedWallIndex];
+    
+    if(nextVC == nil){
         nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
-        nextVC.wallName = [@(wantedWallNumberID) stringValue];
-        nextVC.wallNumberID = wantedWallNumberID;
-        [VCArray addObject:nextVC];
-    } else{
-        nextVC = [VCArray objectAtIndex: wantedWallNumberID];
+        nextVC.wallName = self.wallsList[wantedWallIndex.intValue];
+        nextVC.wallID = [self.pageClimbingType stringByAppendingString: nextVC.wallName];
+        [self.VCDictionary setObject:nextVC forKey:wantedWallIndex];
+        //build arr
     }
     return nextVC;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController{
     CoreViewController * prevVC = (CoreViewController *)viewController;
-    if(prevVC == nil){
-        NSLog(@"WARNING: PrevVC is not a CoreViewController. How did we get here?");
-        return nil;
+    CoreViewController * nextVC;
+    NSAssert([prevVC isKindOfClass:[CoreViewController class]], @"WARNING: PrevVC is not a CoreViewController. How did we get here?");
+    
+    NSUInteger wanted = [self.wallsList indexOfObject:prevVC.wallName] - 1;
+    NSNumber * wantedWallIndex = [[NSNumber alloc] initWithUnsignedLong:wanted];
+    if( wantedWallIndex.intValue == -1){
+        wantedWallIndex = [NSNumber numberWithUnsignedLong: self.wallsList.count-1];
     }
-    NSUInteger wantedWallNumberID = prevVC.wallNumberID - 1;
-    if(wantedWallNumberID == -1){
-        return nil;
+    nextVC = [self.VCDictionary objectForKey:wantedWallIndex];
+    
+    if(nextVC == nil){
+        nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
+        nextVC.wallName = self.wallsList[wantedWallIndex.intValue];
+        nextVC.wallID = [self.pageClimbingType stringByAppendingString: nextVC.wallName];
+        [self.VCDictionary setObject:nextVC forKey:wantedWallIndex];
+        //build arr
     }
-    return [VCArray objectAtIndex:wantedWallNumberID];
+    return nextVC;
 }
+
+-(void)configureDatabase{
+    self.ref = [[FIRDatabase database] reference];
+    // Listen for new messages in the Firebase database
+    [[self.ref child:wallListPath] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        NSEnumerator *children = [snapshot children];
+        FIRDataSnapshot *child;
+        while (child = [children nextObject]) {
+            [self.wallsList addObject:child.value];
+        }
+
+        
+        //TODO wall wise view controller logic
+        CoreViewController * vc0 = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
+        
+        vc0.wallName = self.wallsList[0];
+        vc0.wallID = [self.pageClimbingType stringByAppendingString: vc0.wallName];
+        
+        [self.VCDictionary setObject:vc0 forKey: [[NSNumber alloc] initWithInt:0]];
+        [self setViewControllers: @[vc0] direction: UIPageViewControllerNavigationDirectionForward animated: NO completion: nil];
+        
+        self.navigationItem.title = vc0.wallName;
+    }];
+
+}
+
+// ====== not needed with observeSINGLEevent... ====
+//- (void)dealloc {
+//    [[self.ref child:wallListPath] removeObserverWithHandle: self.refHandleWallList];
+//}
 
 /*
 #pragma mark - Navigation
@@ -83,4 +129,31 @@
 }
 */
 
+-(void)configureGymName{
+    self.userSettings = NSUserDefaults.standardUserDefaults;
+    self.gymName = [self.userSettings stringForKey:@"currentGym"];
+    if(self.gymName == nil){
+        NSLog(@"No gym selected, defualting to KLC");
+        //TODO gym selection
+        self.gymName = @"fysiken-klatterlabbet-centrum";
+        [self.userSettings setObject:@"fysiken-klatterlabbet-centrum" forKey:@"currentGym"];
+    }
+}
+
+-(void)configureClimbingType{
+    NSString * tabTitle = self.tabBarController.tabBar.selectedItem.title;
+    if([ tabTitle isEqual: (@"Boulders")]){
+        self.pageClimbingType = @"boulders";
+    }else if([ tabTitle isEqual: (@"Routes")]){
+        self.pageClimbingType = @"routes";
+    }else{
+        [NSException raise: @"Unknown tabTitle: " format: @" %@ ",tabTitle];
+    };
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
+    if(completed){
+        self.navigationItem.title = ((CoreViewController *)self.viewControllers.firstObject).wallName;
+    }
+}
 @end

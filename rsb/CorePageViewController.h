@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CoreViewController.h"
+@import Firebase;
 
-@interface CorePageViewController : UIPageViewController <UIPageViewControllerDataSource>
+@interface CorePageViewController : UIPageViewController <UIPageViewControllerDataSource,UIPageViewControllerDelegate>
+
+@property NSUserDefaults * userSettings;
 @property NSString * pageClimbingType;
 @property NSString * gymName;
+
+//@property FIRDatabaseHandle refHandleWallList;
+@property (strong, nonatomic) FIRDatabaseReference * ref;
+@property (strong, nonatomic) NSMutableArray<NSString *> * wallsList;
+@property(strong, nonatomic)  NSMutableDictionary<NSNumber* , CoreViewController *> * VCDictionary;
 
 @end
