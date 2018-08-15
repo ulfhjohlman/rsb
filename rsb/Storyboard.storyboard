@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -245,10 +246,67 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iGL-PH-K7Z" id="3Mg-OS-B1Z">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbh-ol-9bi">
+                                                            <rect key="frame" x="15" y="5.5" width="48" height="32"/>
+                                                            <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="32" id="0mx-fT-Pdh"/>
+                                                                <constraint firstAttribute="width" constant="48" id="j94-ba-MKR"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Center" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgw-oA-vg1">
+                                                            <rect key="frame" x="71" y="11" width="52" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="| 1 | 2 | 3 |" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UR-2g-UZy">
+                                                            <rect key="frame" x="131" y="12" width="76" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drs-GI-TCI">
+                                                            <rect key="frame" x="215" y="11.5" width="47" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="7UR-2g-UZy" firstAttribute="centerY" secondItem="3Mg-OS-B1Z" secondAttribute="centerY" id="3CK-Ye-ywA"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="7UR-2g-UZy" secondAttribute="trailing" constant="8" id="69G-mN-r7l"/>
+                                                        <constraint firstItem="drs-GI-TCI" firstAttribute="centerY" secondItem="3Mg-OS-B1Z" secondAttribute="centerY" id="78f-pL-4EJ"/>
+                                                        <constraint firstItem="Xbh-ol-9bi" firstAttribute="leading" secondItem="3Mg-OS-B1Z" secondAttribute="leadingMargin" id="8Tb-So-bFJ"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="jgw-oA-vg1" secondAttribute="trailing" constant="8" id="GEr-jP-BLz"/>
+                                                        <constraint firstItem="Xbh-ol-9bi" firstAttribute="centerY" secondItem="3Mg-OS-B1Z" secondAttribute="centerY" id="TUl-Ay-o3v"/>
+                                                        <constraint firstItem="jgw-oA-vg1" firstAttribute="centerY" secondItem="3Mg-OS-B1Z" secondAttribute="centerY" id="VMc-df-z6H"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Xbh-ol-9bi" secondAttribute="trailing" constant="8" id="ZDi-d4-MaB"/>
+                                                        <constraint firstItem="drs-GI-TCI" firstAttribute="leading" secondItem="7UR-2g-UZy" secondAttribute="trailing" constant="8" id="nxZ-vB-1tv"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="drs-GI-TCI" secondAttribute="trailing" constant="8" id="pb1-4u-it1"/>
+                                                        <constraint firstItem="7UR-2g-UZy" firstAttribute="leading" secondItem="jgw-oA-vg1" secondAttribute="trailing" constant="8" id="twz-P6-ios"/>
+                                                        <constraint firstItem="jgw-oA-vg1" firstAttribute="leading" secondItem="Xbh-ol-9bi" secondAttribute="trailing" constant="8" id="yLj-Gj-qgr"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" staticText="YES"/>
                                                 </accessibility>
+                                                <connections>
+                                                    <outlet property="difficultyLabel" destination="Xbh-ol-9bi" id="SvV-o1-HDR"/>
+                                                    <outlet property="locationLabel" destination="jgw-oA-vg1" id="Hjf-8n-zpq"/>
+                                                    <outlet property="ricLabel" destination="7UR-2g-UZy" id="d1v-1f-dBe"/>
+                                                    <outlet property="setterLabel" destination="drs-GI-TCI" id="Zmb-b6-9py"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -278,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfe-UJ-L9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="180"/>
+            <point key="canvasLocation" x="1959.375" y="180"/>
         </scene>
         <!--AddRoute-->
         <scene sceneID="hGu-AM-2OT">

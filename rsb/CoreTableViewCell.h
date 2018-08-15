@@ -11,16 +11,16 @@
 
 typedef enum{
     left,
-    middle,
+    center,
     right
 } RouteLocationType;
 
 typedef enum{
-    BMmm,
-    BMm,
-    BM,
-    BMp,
-    BMpp
+    mm,
+    m,
+    bm,
+    p,
+    pp
 } RouteDifficultyType;
 
 typedef enum {
@@ -53,6 +53,10 @@ typedef enum {
 @property NSString * buildDate;
 @property NSString * uploadDate;
 
+@property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ricLabel;
+@property (weak, nonatomic) IBOutlet UILabel *setterLabel;
 
 
 

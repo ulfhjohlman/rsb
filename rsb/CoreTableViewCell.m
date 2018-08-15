@@ -36,7 +36,73 @@
     self.buildDate = snapDictionary[@"build-date"];
     self.uploadDate = snapDictionary[@"post-date"];
     
-    self.textLabel.text = [NSString stringWithFormat: @"%@ %@ %@ %@ %@ (RIC: %d,%d,%d)",self.color, self.difficulty, self.setter, self.location, self.buildDate, self.r, self.i, self.c];
+    [self applyDifficultyLabel];
+    [self applyColorLabel];
+    self.locationLabel.text = self.location;
+    self.setterLabel.text = self.setter;
+    self.ricLabel.text = [NSString stringWithFormat:@"| %d | %d | %d |",self.r,self.i,self.c];
+}
+
+-(void)applyDifficultyLabel{
+    NSString * str;
+    if( [self.difficulty isEqualToString:@"mm"]){
+        str = @"--";
+    }
+    else if( [self.difficulty isEqualToString:@"m"]){
+        str = @"-";
+    }
+    else if( [self.difficulty isEqualToString:@"bm"]){
+        str = @"BM";
+    }
+    else if( [self.difficulty isEqualToString:@"p"]){
+        str = @"+";
+    }
+    else if( [self.difficulty isEqualToString:@"pp"]){
+        str = @"++";
+    }
+    else{
+        NSLog(@"Error Setting unknown cell difficulty: %@!", self.difficulty);
+        str = @"";
+    }
+    NSDictionary *attrsDictionary = @{NSStrokeColorAttributeName : UIColor.blackColor ,
+                                      NSForegroundColorAttributeName : UIColor.whiteColor,
+                                      NSStrokeWidthAttributeName : [NSNumber numberWithDouble:-1.0],
+                                      };
+    self.difficultyLabel.attributedText = [[NSAttributedString alloc] initWithString:str attributes: attrsDictionary] ;
+}
+
+-(void)applyColorLabel{
+    if([self.color isEqualToString:@"purple"]){
+        self.difficultyLabel.backgroundColor = [UIColor purpleColor];
+    }
+    else if([self.color isEqualToString:@"white"]){
+        self.difficultyLabel.backgroundColor = [UIColor whiteColor];
+    }
+    else if([self.color isEqualToString:@"blue"]){
+        self.difficultyLabel.backgroundColor = [UIColor blueColor];
+    }
+    else if([self.color isEqualToString:@"black"]){
+        self.difficultyLabel.backgroundColor = [UIColor blackColor];
+    }
+    else if([self.color isEqualToString:@"red"]){
+        self.difficultyLabel.backgroundColor = [UIColor redColor];
+    }
+    else if([self.color isEqualToString:@"orange"]){
+        self.difficultyLabel.backgroundColor = [UIColor orangeColor];
+    }
+    else if([self.color isEqualToString:@"pink"]){
+        self.difficultyLabel.backgroundColor = [UIColor magentaColor];
+    }
+    else if([self.color isEqualToString:@"green"]){
+        self.difficultyLabel.backgroundColor = [UIColor greenColor];
+    }
+    else if([self.color isEqualToString:@"yellow"]){
+        self.difficultyLabel.backgroundColor = [UIColor yellowColor];
+    }
+    else{
+        NSLog(@"Error Setting unknown cell color: %@!", self.color);
+    }
+    
 }
 
 @end
