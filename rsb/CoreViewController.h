@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CorePageViewController.h"
 
 @interface CoreViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) IBOutlet UIImageView *ImageView;
-@property (strong, nonatomic) IBOutlet UITableView *TableView;
+@property (strong, nonatomic) IBOutlet UIImageView * imageView;
+@property (strong, nonatomic) IBOutlet UITableView * tableView;
 @property NSString * wallName;
 @property NSString * wallID;
-@property NSArray<NSString*> * tableCellsText;
 
 @end

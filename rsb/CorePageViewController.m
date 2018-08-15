@@ -13,9 +13,6 @@
 @end
 
 @implementation CorePageViewController{
-    NSString * gymBasePath;
-    NSString * gymClimbingTypePath;
-    NSString * wallListPath;
 }
 
 - (void)viewDidLoad {
@@ -26,9 +23,9 @@
     
     [self configureClimbingType];
     [self configureGymName];
-    gymBasePath = [NSString stringWithFormat: @"gyms/%@",self.gymName];
-    gymClimbingTypePath = [NSString stringWithFormat: @"%@/%@",gymBasePath,self.pageClimbingType];
-    wallListPath = [NSString stringWithFormat: @"%@/WALL_LIST",gymBasePath];
+    self.gymBasePath = [NSString stringWithFormat: @"gyms/%@",self.gymName];
+    self.gymClimbingTypePath = [NSString stringWithFormat: @"%@/%@",self.gymBasePath,self.pageClimbingType];
+    self.wallListPath = [NSString stringWithFormat: @"%@/WALL_LIST",self.gymClimbingTypePath];
     
     
     self.wallsList = [[NSMutableArray alloc] init];
@@ -55,7 +52,7 @@
     if( wantedWallIndex.intValue == self.wallsList.count){
         wantedWallIndex = [NSNumber numberWithInt: 0];
     }
-    nextVC = [self.VCDictionary objectForKey:wantedWallIndex];
+    nextVC = (CoreViewController*)[self.VCDictionary objectForKey:wantedWallIndex];
     
     if(nextVC == nil){
         nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
@@ -77,7 +74,7 @@
     if( wantedWallIndex.intValue == -1){
         wantedWallIndex = [NSNumber numberWithUnsignedLong: self.wallsList.count-1];
     }
-    nextVC = [self.VCDictionary objectForKey:wantedWallIndex];
+    nextVC =  (CoreViewController*)[self.VCDictionary objectForKey:wantedWallIndex];
     
     if(nextVC == nil){
         nextVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CoreViewController"];
@@ -92,7 +89,7 @@
 -(void)configureDatabase{
     self.ref = [[FIRDatabase database] reference];
     // Listen for new messages in the Firebase database
-    [[self.ref child:wallListPath] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    [[self.ref child:self.wallListPath] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         NSEnumerator *children = [snapshot children];
         FIRDataSnapshot *child;
         while (child = [children nextObject]) {
