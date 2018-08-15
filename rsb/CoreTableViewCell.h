@@ -43,7 +43,7 @@ typedef enum {
 @property int r;
 @property int i;
 @property int c;
-@property Boolean onWall;
+@property NSString * onWall;
 @property NSString * color;
 @property NSString * location;
 @property NSString * setter;

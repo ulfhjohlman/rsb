@@ -31,7 +31,7 @@
     self.color = snapDictionary[@"color"];
     self.location = snapDictionary[@"location"];
     self.difficulty = snapDictionary[@"difficulty"];
-    self.onWall = [snapDictionary[@"onWall"] boolValue];
+    self.onWall = snapDictionary[@"onWall"];
     self.tags = [snapshot childSnapshotForPath:@"tags"].value;
     self.buildDate = snapDictionary[@"build-date"];
     self.uploadDate = snapDictionary[@"post-date"];
@@ -41,6 +41,7 @@
     self.locationLabel.text = self.location;
     self.setterLabel.text = self.setter;
     self.ricLabel.text = [NSString stringWithFormat:@"| %d | %d | %d |",self.r,self.i,self.c];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 -(void)applyDifficultyLabel{
@@ -66,7 +67,7 @@
     }
     NSDictionary *attrsDictionary = @{NSStrokeColorAttributeName : UIColor.blackColor ,
                                       NSForegroundColorAttributeName : UIColor.whiteColor,
-                                      NSStrokeWidthAttributeName : [NSNumber numberWithDouble:-1.0],
+                                      NSStrokeWidthAttributeName : [NSNumber numberWithDouble:-2.0],
                                       };
     self.difficultyLabel.attributedText = [[NSAttributedString alloc] initWithString:str attributes: attrsDictionary] ;
 }

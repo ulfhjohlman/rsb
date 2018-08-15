@@ -81,6 +81,21 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView beginUpdates];
+    if ([indexPath compare:self.expandedIndexPath] == NSOrderedSame) {
+        self.expandedIndexPath = nil;
+    } else {
+        self.expandedIndexPath = indexPath;
+    }
+    [tableView endUpdates];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([indexPath compare:self.expandedIndexPath] == NSOrderedSame) {
+        return 100.0;
+    }
+    return 44.0;
+}
 @end

@@ -15,4 +15,6 @@
 @property NSString * wallName;
 @property NSString * wallID;
 
+@property (strong, nonatomic) NSIndexPath *expandedIndexPath;
+
 @end
