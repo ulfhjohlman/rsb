@@ -52,11 +52,18 @@ typedef enum {
 @property NSArray<NSString * > * tags;
 @property NSString * buildDate;
 @property NSString * uploadDate;
+@property NSString * notes;
 
 @property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ricLabel;
 @property (weak, nonatomic) IBOutlet UILabel *setterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tagsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *BuildDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *notesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tagsTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *buildTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *notesTextLabel;
 
 
 

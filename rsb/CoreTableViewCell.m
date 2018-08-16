@@ -35,12 +35,17 @@
     self.tags = [snapshot childSnapshotForPath:@"tags"].value;
     self.buildDate = snapDictionary[@"build-date"];
     self.uploadDate = snapDictionary[@"post-date"];
+    self.notes = snapDictionary[@"notes"];
     
     [self applyDifficultyLabel];
     [self applyColorLabel];
     self.locationLabel.text = self.location;
     self.setterLabel.text = self.setter;
     self.ricLabel.text = [NSString stringWithFormat:@"| %d | %d | %d |",self.r,self.i,self.c];
+    self.buildTextLabel.text = self.buildDate;
+    self.notesTextLabel.text = self.notes;
+    [self applyTags];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -103,7 +108,10 @@
     else{
         NSLog(@"Error Setting unknown cell color: %@!", self.color);
     }
-    
+}
+
+-(void) applyTags{
+    //TODO
 }
 
 @end
