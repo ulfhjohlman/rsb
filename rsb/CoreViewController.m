@@ -51,9 +51,15 @@
 -(void)configDatabase{
     NSString * contentPath = [wallPath stringByAppendingString:@"/content"];
     db_ref = [[[FIRDatabase database] reference] child: contentPath];
-    addListenerHandle = [db_ref  observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        [self->activeSnapshotArray addObject:snapshot];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self->activeSnapshotArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+    addListenerHandle = [db_ref  observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        [self->activeSnapshotArray removeAllObjects];
+        for (FIRDataSnapshot* child in snapshot.children){
+                [self->activeSnapshotArray addObject:child];
+        }
+        self.expandedIndexPath = nil;
+        [self.tableView reloadData];
+        //[self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self->activeSnapshotArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+        [self sortActiveSnapshotArray];
     }];
     
     //wall picture storage url handling
@@ -64,6 +70,95 @@
             [self refreshPicture];
         }
     }];
+}
+
+-(void)sortActiveSnapshotArray{
+    [activeSnapshotArray sortUsingComparator:^NSComparisonResult(id a, id b) {
+        NSDictionary<NSString*,NSString*> * aSnapDictionary = ((FIRDataSnapshot *)a).value;
+        NSDictionary<NSString*,NSString*> * bSnapDictionary = ((FIRDataSnapshot *)b).value;
+        NSString *firstColor = aSnapDictionary[@"color"];
+        NSString *secondColor = bSnapDictionary[@"color"];
+        NSString *firstDiff = aSnapDictionary[@"difficulty"];
+        NSString *secondDiff = bSnapDictionary[@"difficulty"];
+        
+        if(secondColor == nil){
+            return NSOrderedAscending;
+        }
+        if(firstColor == nil){
+            return NSOrderedDescending;
+        }
+        NSComparisonResult result = [CoreViewController compareColorDiff:firstColor To:secondColor];
+        if( result == NSOrderedSame){
+            if(secondDiff == nil){
+                return NSOrderedAscending;
+            }
+            if(firstDiff == nil){
+                return NSOrderedDescending;
+            }
+            return [CoreViewController compareDifficulty:firstDiff To:secondDiff];
+        }
+        else return result;
+    }];
+}
+
++ (NSComparisonResult) compareColorDiff: (NSString*) firstColor To:(NSString*) secondColor{
+    return [[CoreViewController colorDiffToInt:firstColor] compare:[CoreViewController colorDiffToInt:secondColor]];
+}
+
++(NSNumber *) colorDiffToInt: (NSString *) color{
+    if([color isEqualToString:@"purple"]){
+        return [NSNumber numberWithInt:0];
+    }
+    if([color isEqualToString:@"white"]){
+        return [NSNumber numberWithInt:1];
+    }
+    if([color isEqualToString:@"blue"]){
+        return [NSNumber numberWithInt:2];
+    }
+    if([color isEqualToString:@"black"]){
+        return [NSNumber numberWithInt:3];
+    }
+    if([color isEqualToString:@"red"]){
+        return [NSNumber numberWithInt:4];
+    }
+    if([color isEqualToString:@"orange"]){
+        return [NSNumber numberWithInt:5];
+    }
+    if([color isEqualToString:@"pink"]){
+        return [NSNumber numberWithInt:6];
+    }
+    if([color isEqualToString:@"green"]){
+        return [NSNumber numberWithInt:7];
+    }
+    if([color isEqualToString:@"yellow"]){
+        return [NSNumber numberWithInt:8];
+    }
+    NSLog(@"WARNING unknown color: %@, converted to int :S!!!", color);
+    return nil;
+}
+
++(NSComparisonResult) compareDifficulty: (NSString *) firstDiff To: (NSString *) secondDiff{
+    return [[CoreViewController diffToInt:firstDiff] compare:[CoreViewController diffToInt:secondDiff]];
+}
+
++(NSNumber *) diffToInt: (NSString*) diff{
+    if( [diff isEqualToString:@"mm"]){
+        return [NSNumber numberWithInt:0];
+    }
+    if( [diff isEqualToString:@"m"]){
+        return [NSNumber numberWithInt:1];
+    }
+    if( [diff isEqualToString:@"bm"]){
+        return [NSNumber numberWithInt:2];
+    }
+    if( [diff isEqualToString:@"p"]){
+        return [NSNumber numberWithInt:3];
+    }
+    if( [diff isEqualToString:@"pp"]){
+        return [NSNumber numberWithInt:4];
+    }
+    NSLog(@"WARNING unknown difficulty: %@, converted to int :S!!!", diff);
+    return nil;
 }
 
 - (void)dealloc {

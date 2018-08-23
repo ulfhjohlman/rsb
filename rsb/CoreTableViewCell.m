@@ -108,6 +108,8 @@
     else{
         NSLog(@"Error Setting unknown cell color: %@!", self.color);
     }
+    self.difficultyLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    self.difficultyLabel.layer.borderWidth = 2.0;
 }
 
 -(void) applyTags{
