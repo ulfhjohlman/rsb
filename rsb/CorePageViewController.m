@@ -151,6 +151,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed{
     if(completed){
         self.navigationItem.title = ((CoreViewController *)self.viewControllers.firstObject).wallName;
+        [self.view setNeedsDisplay];
     }
 }
 @end

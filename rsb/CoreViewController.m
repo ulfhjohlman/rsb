@@ -9,18 +9,25 @@
 #import "CoreViewController.h"
 #import "CoreTableViewCell.h"
 #import "CorePageViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImageView+FirebaseStorage.h"
 @import Firebase;
 
 @interface CoreViewController ()
 @end
 
 @implementation CoreViewController{
-    FIRDatabaseReference * ref;
+    FIRDatabaseReference * db_ref;
+    FIRDatabaseReference * db_ref_pic;
+    FIRStorage * storage;
+    FIRStorageReference * storage_ref;
     NSString * wallPath;
+    FIRDatabaseHandle picChangeListenerHandle;
     FIRDatabaseHandle addListenerHandle;
-    FIRDatabaseHandle removeListenerHandle;
-    FIRDatabaseHandle changeListenerHandle;
+    //FIRDatabaseHandle removeListenerHandle;
+    //FIRDatabaseHandle changeListenerHandle;
     NSMutableArray<FIRDataSnapshot *> * activeSnapshotArray;
+    NSString * wallPicPath;
 }
 
 - (void)viewDidLoad {
@@ -32,21 +39,36 @@
     
     wallPath = [[parentVC.gymClimbingTypePath stringByAppendingString: @"/"] stringByAppendingString:self.wallName];
     
+    storage = [FIRStorage storage];
     [self configDatabase];
+
+    
+    
     
     
 }
 
 -(void)configDatabase{
-    ref = [[[FIRDatabase database] reference] child: wallPath];
-    addListenerHandle = [ref  observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+    NSString * contentPath = [wallPath stringByAppendingString:@"/content"];
+    db_ref = [[[FIRDatabase database] reference] child: contentPath];
+    addListenerHandle = [db_ref  observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
         [self->activeSnapshotArray addObject:snapshot];
         [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self->activeSnapshotArray.count-1 inSection:0]] withRowAnimation: UITableViewRowAnimationAutomatic];
+    }];
+    
+    //wall picture storage url handling
+    db_ref_pic = [[[FIRDatabase database] reference] child: [wallPath stringByAppendingString:@"/picFileName"]];
+    picChangeListenerHandle = [db_ref_pic observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        if(snapshot.exists){
+            self->wallPicPath = [[self->wallPath stringByAppendingString: @"/"] stringByAppendingString:snapshot.value];
+            [self refreshPicture];
+        }
     }];
 }
 
 - (void)dealloc {
-    [ref removeObserverWithHandle: addListenerHandle];
+    [db_ref removeObserverWithHandle: addListenerHandle];
+    [db_ref_pic removeObserverWithHandle:picChangeListenerHandle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,4 +121,12 @@
     }
     return 42.0;
 }
+
+
+-(void)refreshPicture{
+    storage_ref = [storage referenceWithPath: wallPicPath];
+    [self.imageView sd_setImageWithStorageReference:storage_ref placeholderImage:nil];
+    [self.view setNeedsDisplay];
+}
+
 @end
