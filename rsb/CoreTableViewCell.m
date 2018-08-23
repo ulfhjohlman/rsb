@@ -32,7 +32,9 @@
     self.location = snapDictionary[@"location"];
     self.difficulty = snapDictionary[@"difficulty"];
     self.onWall = snapDictionary[@"onWall"];
-    self.tags = [snapshot childSnapshotForPath:@"tags"].value;
+    if( [snapshot hasChild:@"tags"]){
+        self.tags = [snapshot childSnapshotForPath:@"tags"].value;
+    }
     self.buildDate = snapDictionary[@"build-date"];
     self.uploadDate = snapDictionary[@"post-date"];
     self.notes = snapDictionary[@"notes"];
@@ -113,7 +115,12 @@
 }
 
 -(void) applyTags{
-    //TODO
+    self.tagsTextLabel.text = nil;
+    if(self.tags != nil && self.tags.count > 0){
+        for(NSString* tag in self.tags){
+            self.tagsTextLabel.text = [[self.tagsTextLabel.text stringByAppendingString:tag] stringByAppendingString:@" "];
+        }
+    }
 }
 
 @end
