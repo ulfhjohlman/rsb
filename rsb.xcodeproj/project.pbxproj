@@ -21,6 +21,8 @@
 		614FBF0020FD412E00897378 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBEFA20FD412E00897378 /* SettingsViewController.m */; };
 		614FBF0520FE0D8900897378 /* CoreNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FBF0420FE0D8900897378 /* CoreNavController.m */; };
 		614FBF0720FE2DD600897378 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 614FBF0620FE2DD500897378 /* GoogleService-Info.plist */; };
+		61BF5764212F34EB00F1A265 /* AddRouteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BF5763212F34EA00F1A265 /* AddRouteController.m */; };
+		61E7C827212F410D0049660E /* Purple.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 61E7C826212F410D0049660E /* Purple.jpg */; };
 		6EC80C13614A6EF1078C5914 /* libPods-rsbTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E11F0D4607CDB02C69F2D5 /* libPods-rsbTests.a */; };
 		892C5CB360B4DE90C1FC6CA9 /* libPods-rsbUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EDFE870E0AE24D642EF06D /* libPods-rsbUITests.a */; };
 		C6A981776369AEBA8CC1C8E1 /* libPods-rsb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF15E0D3FFE091F3313D8D4E /* libPods-rsb.a */; };
@@ -76,6 +78,9 @@
 		614FBF0320FE0D8900897378 /* CoreNavController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreNavController.h; sourceTree = "<group>"; };
 		614FBF0420FE0D8900897378 /* CoreNavController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreNavController.m; sourceTree = "<group>"; };
 		614FBF0620FE2DD500897378 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		61BF5762212F34EA00F1A265 /* AddRouteController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddRouteController.h; sourceTree = "<group>"; };
+		61BF5763212F34EA00F1A265 /* AddRouteController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddRouteController.m; sourceTree = "<group>"; };
+		61E7C826212F410D0049660E /* Purple.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Purple.jpg; path = ../../../../Downloads/Purple.jpg; sourceTree = "<group>"; };
 		64B4536A59A20444D9CB8843 /* Pods-rsb.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rsb.release.xcconfig"; path = "Pods/Target Support Files/Pods-rsb/Pods-rsb.release.xcconfig"; sourceTree = "<group>"; };
 		C6FFDBAEEAC15C82CB597F45 /* Pods-rsbUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rsbUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rsbUITests/Pods-rsbUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D5E11F0D4607CDB02C69F2D5 /* libPods-rsbTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rsbTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +157,9 @@
 				614FBEC920FD3EE300897378 /* LaunchScreen.storyboard */,
 				614FBEC720FD3EE300897378 /* Assets.xcassets */,
 				614FBEF020FD412C00897378 /* Storyboard.storyboard */,
+				61E7C826212F410D0049660E /* Purple.jpg */,
+				61BF5762212F34EA00F1A265 /* AddRouteController.h */,
+				61BF5763212F34EA00F1A265 /* AddRouteController.m */,
 				614FBEF920FD412E00897378 /* CircuitsViewController.h */,
 				614FBEF120FD412C00897378 /* CircuitsViewController.m */,
 				614FBEF320FD412D00897378 /* CorePageViewController.h */,
@@ -308,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				614FBECB20FD3EE300897378 /* LaunchScreen.storyboard in Resources */,
+				61E7C827212F410D0049660E /* Purple.jpg in Resources */,
 				614FBF0720FE2DD600897378 /* GoogleService-Info.plist in Resources */,
 				614FBEC820FD3EE300897378 /* Assets.xcassets in Resources */,
 				614FBEFB20FD412E00897378 /* Storyboard.storyboard in Resources */,
@@ -415,6 +424,7 @@
 				614FBF0520FE0D8900897378 /* CoreNavController.m in Sources */,
 				614FBEFE20FD412E00897378 /* CorePageViewController.m in Sources */,
 				614FBEFF20FD412E00897378 /* CoreViewController.m in Sources */,
+				61BF5764212F34EB00F1A265 /* AddRouteController.m in Sources */,
 				614FBECE20FD3EE300897378 /* main.m in Sources */,
 				614FBEFC20FD412E00897378 /* CircuitsViewController.m in Sources */,
 				614FBEFD20FD412E00897378 /* CoreTableViewCell.m in Sources */,
