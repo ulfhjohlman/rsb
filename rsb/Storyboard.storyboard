@@ -420,7 +420,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="587"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TI0-bw-R3O">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYa-fx-AXM">
                                                 <rect key="frame" x="139" y="8" width="42" height="21"/>
@@ -651,6 +651,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="CSS-qF-mPh" id="GxL-Qv-mat"/>
+                                                </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="F5g-Ko-INj">
                                                 <rect key="frame" x="60" y="95.5" width="200" height="29"/>
@@ -685,6 +688,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="CSS-qF-mPh" id="4F5-6g-taI"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eke-1u-hPB">
                                                 <rect key="frame" x="40" y="404.5" width="50.5" height="20.5"/>
@@ -697,6 +703,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="CSS-qF-mPh" id="AKt-Gk-QKX"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Tl-mk-P2I">
                                                 <rect key="frame" x="40" y="441" width="83.5" height="20.5"/>
@@ -729,7 +738,7 @@
                                             <constraint firstItem="3IA-1Z-95U" firstAttribute="top" secondItem="jPV-tj-urI" secondAttribute="bottom" constant="12" id="B1G-Gl-TlC"/>
                                             <constraint firstItem="2pf-18-dFO" firstAttribute="leading" secondItem="3IA-1Z-95U" secondAttribute="trailing" constant="5" id="B9x-oY-f6x"/>
                                             <constraint firstItem="9PY-DG-Nkl" firstAttribute="bottom" secondItem="F5g-Ko-INj" secondAttribute="top" constant="-4" id="DTG-1G-tFn"/>
-                                            <constraint firstAttribute="height" constant="600" id="Der-Jb-t1H"/>
+                                            <constraint firstAttribute="height" constant="750" id="Der-Jb-t1H"/>
                                             <constraint firstItem="YBC-oC-m52" firstAttribute="width" secondItem="cv5-Y7-SaT" secondAttribute="width" id="G5h-Pu-42u"/>
                                             <constraint firstItem="h0m-Dg-zAD" firstAttribute="top" secondItem="9kh-K1-B5b" secondAttribute="bottom" constant="4" id="LMl-hO-c7L"/>
                                             <constraint firstItem="9PY-DG-Nkl" firstAttribute="top" secondItem="Q9i-og-bc9" secondAttribute="bottom" constant="8" id="LtF-qO-iaZ"/>
@@ -770,7 +779,7 @@
                                 <constraints>
                                     <constraint firstItem="TI0-bw-R3O" firstAttribute="height" secondItem="CvK-wo-kmD" secondAttribute="height" priority="250" id="3Z3-NL-1JM"/>
                                     <constraint firstItem="TI0-bw-R3O" firstAttribute="width" secondItem="CvK-wo-kmD" secondAttribute="width" id="PP8-Gb-gG4"/>
-                                    <constraint firstAttribute="bottom" secondItem="TI0-bw-R3O" secondAttribute="bottom" constant="-56" id="kbJ-t6-NLR"/>
+                                    <constraint firstAttribute="bottom" secondItem="TI0-bw-R3O" secondAttribute="bottom" id="kbJ-t6-NLR"/>
                                     <constraint firstItem="TI0-bw-R3O" firstAttribute="top" secondItem="CvK-wo-kmD" secondAttribute="top" id="syd-xV-Iyt"/>
                                     <constraint firstItem="TI0-bw-R3O" firstAttribute="leading" secondItem="CvK-wo-kmD" secondAttribute="leading" id="xCp-EU-W6k"/>
                                     <constraint firstAttribute="trailing" secondItem="TI0-bw-R3O" secondAttribute="trailing" id="zQf-Ms-7Nu"/>
@@ -797,18 +806,27 @@
                     <connections>
                         <outlet property="blackButton" destination="ukH-yX-aI4" id="xm3-Qo-phE"/>
                         <outlet property="blueButton" destination="ZjM-Fj-14Y" id="ZcI-tR-FRn"/>
+                        <outlet property="buildDateSelector" destination="GvI-Ib-AXD" id="8lT-7l-4h7"/>
+                        <outlet property="cSelector" destination="jPV-tj-urI" id="r2q-Xa-Glm"/>
+                        <outlet property="difficultySelector" destination="F5g-Ko-INj" id="LWa-Ca-6Px"/>
                         <outlet property="greenButton" destination="Iaf-iz-vJj" id="uO9-Nh-5SQ"/>
+                        <outlet property="iSelector" destination="YBC-oC-m52" id="9r0-Uh-OPp"/>
+                        <outlet property="locationSelector" destination="h0m-Dg-zAD" id="ZEd-Dy-8iy"/>
+                        <outlet property="notesTextField" destination="oWz-SF-W9k" id="epV-JV-Lcy"/>
                         <outlet property="orangeButton" destination="qkh-sU-Izq" id="E3Z-7U-GPy"/>
                         <outlet property="pinkButton" destination="3kE-UI-hns" id="mCP-rW-tgD"/>
                         <outlet property="purpleButton" destination="dkl-VK-ntx" id="Cvr-tB-8hH"/>
+                        <outlet property="rSelector" destination="cv5-Y7-SaT" id="Skp-58-sWk"/>
                         <outlet property="redButton" destination="CXZ-3P-YuQ" id="2BF-GD-y6V"/>
+                        <outlet property="setterTextField" destination="2pf-18-dFO" id="hPR-Th-YJT"/>
+                        <outlet property="tagsTextField" destination="twu-Aa-FjU" id="IlC-pt-oBp"/>
                         <outlet property="whiteButton" destination="gdR-Zm-sdn" id="vKS-OS-sMF"/>
                         <outlet property="yellowButton" destination="w5y-8Q-MVW" id="Zas-Gc-vh8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5N-uP-dKl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961.25" y="-645"/>
+            <point key="canvasLocation" x="1959" y="-808"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0OG-5G-P9z">

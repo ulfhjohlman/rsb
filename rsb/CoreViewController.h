@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView * tableView;
 @property NSString * wallName;
 @property NSString * wallID;
+@property NSString * wallPath;
 
 @property (strong, nonatomic) NSIndexPath *expandedIndexPath;
 

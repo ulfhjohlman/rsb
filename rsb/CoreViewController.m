@@ -21,7 +21,7 @@
     FIRDatabaseReference * db_ref_pic;
     FIRStorage * storage;
     FIRStorageReference * storage_ref;
-    NSString * wallPath;
+    
     FIRDatabaseHandle picChangeListenerHandle;
     FIRDatabaseHandle addListenerHandle;
     //FIRDatabaseHandle removeListenerHandle;
@@ -37,7 +37,7 @@
     CorePageViewController* parentVC =((CorePageViewController*) self.parentViewController);
     NSAssert([parentVC isKindOfClass:[CorePageViewController class]], @"WARNING: PrevVC is not a CorePageViewController. How did we get here?");
     
-    wallPath = [[parentVC.gymClimbingTypePath stringByAppendingString: @"/"] stringByAppendingString:self.wallName];
+    self.wallPath = [[parentVC.gymClimbingTypePath stringByAppendingString: @"/"] stringByAppendingString:self.wallName];
     
     storage = [FIRStorage storage];
     [self configDatabase];
@@ -49,7 +49,7 @@
 }
 
 -(void)configDatabase{
-    NSString * contentPath = [wallPath stringByAppendingString:@"/content"];
+    NSString * contentPath = [self.wallPath stringByAppendingString:@"/content"];
     db_ref = [[[FIRDatabase database] reference] child: contentPath];
     addListenerHandle = [db_ref  observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         [self->activeSnapshotArray removeAllObjects];
@@ -63,10 +63,10 @@
     }];
     
     //wall picture storage url handling
-    db_ref_pic = [[[FIRDatabase database] reference] child: [wallPath stringByAppendingString:@"/picFileName"]];
+    db_ref_pic = [[[FIRDatabase database] reference] child: [self.wallPath stringByAppendingString:@"/picFileName"]];
     picChangeListenerHandle = [db_ref_pic observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         if(snapshot.exists){
-            self->wallPicPath = [[self->wallPath stringByAppendingString: @"/"] stringByAppendingString:snapshot.value];
+            self->wallPicPath = [[self.wallPath stringByAppendingString: @"/"] stringByAppendingString:snapshot.value];
             [self refreshPicture];
         }
     }];

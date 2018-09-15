@@ -48,9 +48,9 @@
     self.settingsSignOutButton.hidden = false;
     NSString * name = user.displayName;
     if(name){
-        self.settingsSignedInAsLabel.text = [NSString stringWithFormat:@"%@ %@", @"Logged in as:",name];;
+        self.settingsSignedInAsLabel.text = [NSString stringWithFormat:@"%@ %@", @"Logged in as:",name];
     } else {
-        self.settingsSignedInAsLabel.text = @"unknown";
+        self.settingsSignedInAsLabel.text = @"Logged in as: unknown";
     }
     //TODO show editing privelages?
     

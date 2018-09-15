@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddRouteController : UIViewController
+@interface AddRouteController : UIViewController <UITextFieldDelegate>
 - (IBAction)doneButtonPressed:(id)sender;
+
+@property NSUserDefaults * userDefaults;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *purpleButton;
 - (IBAction)purpleButtonPressed:(id)sender;
@@ -30,6 +33,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *yellowButton;
 - (IBAction)yellowButtonPressed:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *difficultySelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *locationSelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *rSelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *iSelector;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *cSelector;
+@property (weak, nonatomic) IBOutlet UITextField *setterTextField;
+@property (weak, nonatomic) IBOutlet UITextField *tagsTextField;
+@property (weak, nonatomic) IBOutlet UITextField *notesTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *buildDateSelector;
 
 
 @end
