@@ -154,4 +154,25 @@
         [self.view setNeedsDisplay];
     }
 }
+- (IBAction)trashButtonPressed:(id)sender {
+    FIRDatabaseReference * ref = [[FIRDatabase database] reference];
+    NSString * path = ((CoreViewController *)[self viewControllers][0]).wallPath;
+    if(path == nil){
+        NSLog(@"ERROR. Could not get wallPath from child controller");
+        return;
+    }
+    FIRDatabaseReference * post_ref = [ref child: [path stringByAppendingString:@"/content"]];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Delete all?" message:@"Clear this wall of problems/routes?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+        //deletion happens here
+        [post_ref setValue:nil];}
+                                ];
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:noAction];
+    [alert addAction:yesAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 @end

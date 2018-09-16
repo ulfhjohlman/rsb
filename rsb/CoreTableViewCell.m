@@ -74,7 +74,7 @@
     }
     NSDictionary *attrsDictionary = @{NSStrokeColorAttributeName : UIColor.blackColor ,
                                       NSForegroundColorAttributeName : UIColor.whiteColor,
-                                      NSStrokeWidthAttributeName : [NSNumber numberWithDouble:-2.0],
+                                      NSStrokeWidthAttributeName : [NSNumber numberWithDouble:-3.0],
                                       };
     self.difficultyLabel.attributedText = [[NSAttributedString alloc] initWithString:str attributes: attrsDictionary] ;
 }
@@ -115,7 +115,7 @@
 }
 
 -(void) applyTags{
-    self.tagsTextLabel.text = nil;
+    self.tagsTextLabel.text = @"";
     if(self.tags != nil && self.tags.count > 0){
         for(NSString* tag in self.tags){
             self.tagsTextLabel.text = [[self.tagsTextLabel.text stringByAppendingString:tag] stringByAppendingString:@" "];

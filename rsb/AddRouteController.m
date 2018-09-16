@@ -194,6 +194,7 @@ UIButton * selectedColorButton;
     if([str isEqualToString: @"++"]){
         return @"pp";
     }
+    return nil;
 }
 
 -(NSString *) determineSelectedColor{

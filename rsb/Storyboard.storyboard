@@ -215,7 +215,11 @@
                                     <segue destination="CSS-qF-mPh" kind="show" id="gyJ-UG-Ctk"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="archive" id="DVc-GP-pEd"/>
+                            <barButtonItem image="delete" id="DVc-GP-pEd">
+                                <connections>
+                                    <action selector="trashButtonPressed:" destination="8UG-ou-vvD" id="2Kq-YU-Spz"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </pageViewController>
@@ -883,9 +887,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="archive" width="25" height="25"/>
         <image name="box" width="25" height="25"/>
         <image name="close-box-outline" width="25" height="25"/>
+        <image name="delete" width="25" height="25"/>
         <image name="image-area150" width="150" height="150"/>
         <image name="plus" width="25" height="25"/>
         <image name="set-none" width="25" height="25"/>

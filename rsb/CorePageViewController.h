@@ -15,6 +15,8 @@
 @property NSUserDefaults * userSettings;
 @property NSString * pageClimbingType;
 @property NSString * gymName;
+- (IBAction)trashButtonPressed:(id)sender;
+
 
 //@property FIRDatabaseHandle refHandleWallList;
 @property (strong, nonatomic) FIRDatabaseReference * ref;
